@@ -186,6 +186,13 @@ body {
   animation: pulse-dot 1.8s ease-out infinite;
 }
 
+/* hide WebKit's giant play affordance when autoplay is deferred —
+   the poster frame stands in until playback starts */
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 /* thin themed scrollbar */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--ink); }

@@ -1,10 +1,37 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { EASE, RevealLines } from "@/components/Reveal";
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Safari blocks autoplay because React omits the `muted` attribute from
+  // server-rendered HTML (it only sets the JS property after hydration) —
+  // and Safari judges autoplay eligibility from the parsed attribute. Force
+  // muted for real, ask to play, and retry on the first interaction for
+  // strict cases like Low Power Mode.
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    const tryPlay = () => {
+      v.play().catch(() => {});
+    };
+    if (v.readyState >= 2) tryPlay();
+    v.addEventListener("loadeddata", tryPlay, { once: true });
+    window.addEventListener("pointerdown", tryPlay, { once: true });
+    window.addEventListener("scroll", tryPlay, { once: true, passive: true });
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      window.removeEventListener("pointerdown", tryPlay);
+      window.removeEventListener("scroll", tryPlay);
+    };
+  }, []);
+
   return (
     <section className="relative flex h-[100svh] min-h-[620px] items-end overflow-hidden">
       {/* real footage backdrop with slow settle */}
@@ -15,6 +42,7 @@ export default function Hero() {
         transition={{ duration: 6, ease: [0.16, 1, 0.3, 1] }}
       >
         <video
+          ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
           src="/videos/hero-loop.mp4"
           poster="/images/hero.jpg"
@@ -22,6 +50,7 @@ export default function Hero() {
           muted
           loop
           playsInline
+          preload="auto"
           aria-label="Slow-motion golden mango juice splashing over fresh cut mangoes"
         />
       </motion.div>
