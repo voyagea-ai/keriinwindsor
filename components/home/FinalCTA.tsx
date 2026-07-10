@@ -36,7 +36,7 @@ export default function FinalCTA() {
           </p>
         </Reveal>
         <Reveal delay={0.45}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mx-auto mt-10 flex max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4">
             <Link href="/products" className="btn btn-primary">
               Pre-Order Now
             </Link>

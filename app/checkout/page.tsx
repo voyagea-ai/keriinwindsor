@@ -134,7 +134,7 @@ export default function CheckoutPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 flex flex-wrap justify-center gap-4"
+          className="mt-10 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4"
         >
           <Link href="/" className="btn btn-primary">
             Back to Home

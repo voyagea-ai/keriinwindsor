@@ -247,10 +247,10 @@ export default function ScrollFilm() {
             <p className="kicker mb-4 text-mango">
               [{c.index}] — {c.kicker}
             </p>
-            <h3 className="font-display max-w-3xl text-4xl font-medium leading-[1.05] text-cream md:text-6xl">
+            <h3 className="font-display max-w-3xl text-[31px] leading-[1.05] font-medium text-cream sm:text-4xl md:text-6xl">
               {c.title}
             </h3>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-cream/70">
+            <p className="mt-4 max-w-md text-[14px] leading-relaxed text-cream/70 sm:mt-5 sm:text-[15px]">
               {c.copy}
             </p>
           </div>
@@ -265,7 +265,7 @@ export default function ScrollFilm() {
       >
         <div className="container-x text-center">
           <p className="kicker mb-6 text-mango">[07] — The Season</p>
-          <h3 className="font-display mx-auto max-w-3xl text-4xl font-medium leading-[1.03] text-cream md:text-7xl">
+          <h3 className="font-display mx-auto max-w-3xl text-[34px] leading-[1.03] font-medium text-cream sm:text-4xl md:text-7xl">
             Taste it <em className="italic text-mango">while it lasts.</em>
           </h3>
           <p className="mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-cream/60">

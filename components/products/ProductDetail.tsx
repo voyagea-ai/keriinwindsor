@@ -35,6 +35,7 @@ export default function ProductDetail({
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
   const [zoom, setZoom] = useState(false);
+  const contain = product.imageFit === "contain";
   const frame = useRef<HTMLDivElement>(null);
   const isComingSoon = product.status === "coming-soon";
 
@@ -76,6 +77,9 @@ export default function ProductDetail({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, ease: EASE }}
             >
+              {contain && (
+                <div className="absolute inset-0 bg-[radial-gradient(65%_55%_at_50%_46%,rgba(246,164,30,0.2),rgba(7,16,9,0)_75%)]" />
+              )}
               <Image
                 key={product.gallery[active]}
                 src={product.gallery[active]}
@@ -83,10 +87,14 @@ export default function ProductDetail({
                 fill
                 priority
                 sizes="(min-width: 1024px) 55vw, 100vw"
-                className="object-cover transition-transform duration-500 ease-out"
+                className={
+                  contain
+                    ? "object-contain p-10 drop-shadow-[0_40px_70px_rgba(0,0,0,0.55)] transition-transform duration-500 ease-out md:p-14"
+                    : "object-cover transition-transform duration-500 ease-out"
+                }
                 style={{
                   transformOrigin: "var(--zx, 50%) var(--zy, 50%)",
-                  transform: zoom ? "scale(1.7)" : "scale(1)",
+                  transform: zoom ? (contain ? "scale(1.35)" : "scale(1.7)") : "scale(1)",
                 }}
               />
               {product.badge && (
@@ -110,7 +118,13 @@ export default function ProductDetail({
                       : "opacity-55 ring-cream/10 hover:opacity-100"
                   }`}
                 >
-                  <Image src={src} alt="" fill sizes="96px" className="object-cover" />
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="96px"
+                    className={contain ? "object-contain p-2" : "object-cover"}
+                  />
                 </button>
               ))}
             </div>
@@ -156,12 +170,12 @@ export default function ProductDetail({
                     Notify Me
                   </button>
                 ) : (
-                  <div className="flex items-stretch gap-3">
-                    <div className="flex items-center gap-3 rounded-full border border-cream/15 px-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+                    <div className="flex items-center justify-center gap-5 rounded-full border border-cream/15 px-4 py-3 sm:justify-start sm:gap-3 sm:py-0">
                       <button
                         onClick={() => setQty((q) => Math.max(1, q - 1))}
                         aria-label="Decrease quantity"
-                        className="text-lg text-cream/70 transition hover:text-mango"
+                        className="p-1 text-lg text-cream/70 transition hover:text-mango"
                       >
                         −
                       </button>
@@ -171,7 +185,7 @@ export default function ProductDetail({
                       <button
                         onClick={() => setQty((q) => Math.min(20, q + 1))}
                         aria-label="Increase quantity"
-                        className="text-lg text-cream/70 transition hover:text-mango"
+                        className="p-1 text-lg text-cream/70 transition hover:text-mango"
                       >
                         +
                       </button>
@@ -232,7 +246,11 @@ export default function ProductDetail({
                       alt={r.name}
                       fill
                       sizes="128px"
-                      className="object-cover transition-transform duration-[1.2s] group-hover:scale-110"
+                      className={
+                        r.imageFit === "contain"
+                          ? "object-contain p-3 transition-transform duration-[1.2s] group-hover:scale-105"
+                          : "object-cover transition-transform duration-[1.2s] group-hover:scale-110"
+                      }
                     />
                   </div>
                   <div className="min-w-0">

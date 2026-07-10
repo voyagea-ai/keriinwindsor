@@ -12,6 +12,8 @@ export interface Product {
   status: "preorder" | "coming-soon";
   badge?: string;
   image: string;
+  /** "contain" for transparent packshots that float on a dark glow panel. */
+  imageFit?: "contain";
   gallery: string[];
   features: string[];
   description: string;
@@ -127,8 +129,9 @@ export const products: Product[] = [
     priceLabel: "$4.99 CAD",
     status: "coming-soon",
     badge: "Launching Soon",
-    image: "/images/product-pulp.jpg",
-    gallery: ["/images/product-pulp.jpg", "/images/scene-slice.jpg"],
+    image: "/images/product-pulp.png",
+    imageFit: "contain",
+    gallery: ["/images/product-pulp.png"],
     features: [
       "Made from Premium Indian Mangoes",
       "Rich Flavour, Smooth Texture",

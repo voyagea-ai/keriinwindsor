@@ -16,6 +16,7 @@ export default function ProductShowcase({
   const { add, openNotify } = useCart();
   const flipped = index % 2 === 1;
   const isComingSoon = product.status === "coming-soon";
+  const contain = product.imageFit === "contain";
 
   return (
     <Reveal>
@@ -33,19 +34,25 @@ export default function ProductShowcase({
           aria-label={`View ${product.name} details`}
         >
           <div className="relative aspect-[4/5] w-full">
+            {contain && (
+              <div className="absolute inset-0 bg-[radial-gradient(65%_55%_at_50%_46%,rgba(246,164,30,0.22),rgba(7,16,9,0)_75%)]" />
+            )}
             <Image
               src={product.image}
               alt={product.name}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+              className={
+                contain
+                  ? "object-contain p-8 drop-shadow-[0_40px_70px_rgba(0,0,0,0.55)] transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04] md:p-12"
+                  : "object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+              }
             />
-            {isComingSoon && (
-              <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_45%,rgba(246,164,30,0.18),transparent_75%)]" />
-            )}
             {/* glass sheen sweep */}
             <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-cream/10 to-transparent transition-transform duration-[1.2s] ease-out group-hover:translate-x-full" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+            {!contain && (
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+            )}
           </div>
           {product.badge && (
             <span className="absolute left-5 top-5 rounded-full bg-mango px-4 py-1.5 font-mono text-[10.5px] font-medium uppercase tracking-[0.2em] text-ink">
@@ -83,7 +90,7 @@ export default function ProductShowcase({
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
             {isComingSoon ? (
               <button onClick={openNotify} className="btn btn-primary">
                 Notify Me

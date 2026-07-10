@@ -91,15 +91,15 @@ export default function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-10 flex flex-wrap items-center gap-4"
+          className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.35, duration: 0.9, ease: EASE }}
         >
-          <Link href="/products" className="btn btn-primary">
+          <Link href="/products" className="btn btn-primary w-full sm:w-auto">
             Pre-Order Now
           </Link>
-          <Link href="/#varieties" className="btn btn-ghost">
+          <Link href="/#varieties" className="btn btn-ghost w-full sm:w-auto">
             Explore Mangoes
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path

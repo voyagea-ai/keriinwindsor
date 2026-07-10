@@ -34,7 +34,7 @@ export default function PreOrderBand() {
           </p>
         </Reveal>
         <Reveal delay={0.3}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mx-auto mt-10 flex max-w-md flex-col items-stretch gap-3 sm:max-w-none sm:flex-row sm:items-center sm:justify-center sm:gap-4">
             <button
               onClick={() => add("kesar-box")}
               className="btn btn-ink !px-8 !py-4 text-base"
