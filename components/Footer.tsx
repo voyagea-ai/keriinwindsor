@@ -13,7 +13,7 @@ export default function Footer() {
             </p>
             <p className="mt-4 max-w-sm text-[14.5px] leading-relaxed text-cream/50">
               Premium Indian mangoes in limited seasonal batches, delivered
-              across Windsor and nearby areas.
+              across Windsor–Essex and Ontario.
             </p>
           </div>
           <a
@@ -69,11 +69,14 @@ export default function Footer() {
             <Link href="/#story" className="block text-cream/70 transition hover:text-mango">
               The Story
             </Link>
-            <Link href="/#varieties" className="mt-1 block text-cream/70 transition hover:text-mango">
-              Varieties
-            </Link>
             <Link href="/products" className="mt-1 block text-cream/70 transition hover:text-mango">
               Products
+            </Link>
+            <Link href="/delivery" className="mt-1 block text-cream/70 transition hover:text-mango">
+              Delivery Areas
+            </Link>
+            <Link href="/blog" className="mt-1 block text-cream/70 transition hover:text-mango">
+              The Mango Journal
             </Link>
           </div>
           <div>

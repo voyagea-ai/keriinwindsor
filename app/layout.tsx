@@ -5,6 +5,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CartProvider from "@/components/cart/CartContext";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { site } from "@/lib/site";
+import { cities } from "@/lib/cities";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -25,17 +28,28 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://keriinwindsor.com"),
+  metadataBase: new URL("https://keriinwindsor.ca"),
   title: {
-    default: "Keri In Windsor — Windsor's Mango Season Starts Here",
+    default: "Keri In Windsor — Buy Fresh Indian Mangoes in Windsor, Ontario",
     template: "%s — Keri In Windsor",
   },
   description:
-    "Fresh Indian mangoes — Kesar, Alphonso & more — premium quality, limited seasonal batches, delivered with love across Windsor and nearby areas.",
+    "Buy premium Indian mangoes in Windsor, Ontario — Kesar & Alphonso boxes delivered to your door across Windsor–Essex, London, Toronto & Brampton. Limited seasonal batches.",
+  keywords: [
+    "Indian mangoes Windsor",
+    "buy mangoes Windsor Ontario",
+    "Alphonso mangoes Canada",
+    "Kesar mangoes Ontario",
+    "mango delivery Windsor",
+    "Indian mangoes Toronto",
+    "Indian mangoes Brampton",
+    "mango delivery Ontario",
+  ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Keri In Windsor — Windsor's Mango Season Starts Here",
     description:
-      "Fresh Indian mangoes in premium limited seasonal batches, delivered across Windsor and nearby areas.",
+      "Fresh Indian mangoes in premium limited seasonal batches, delivered across Windsor–Essex and Ontario.",
     images: ["/images/hero.jpg"],
     locale: "en_CA",
     type: "website",
@@ -58,6 +72,26 @@ export default function RootLayout({
       className={`${fraunces.variable} ${manrope.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="grain flex min-h-full flex-col">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: site.name,
+            url: site.domain,
+            image: `${site.domain}/images/hero.jpg`,
+            description:
+              "Premium Indian mangoes — Kesar and Alphonso — imported in limited seasonal batches and delivered across Windsor–Essex and Ontario.",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Windsor",
+              addressRegion: "ON",
+              addressCountry: "CA",
+            },
+            areaServed: cities.map((c) => ({ "@type": "City", name: `${c.name}, Ontario` })),
+            sameAs: [site.instagramUrl],
+            priceRange: "$",
+          }}
+        />
         <CartProvider>
           <SmoothScroll />
           <Nav />
