@@ -92,6 +92,17 @@ export default function Footer() {
             © 2026 KERI IN WINDSOR — ALL RIGHTS RESERVED
           </p>
           <p className="font-mono text-[11px] tracking-wider text-cream/30">
+            DESIGNED &amp; DEVELOPED BY{" "}
+            <a
+              href="https://shah-dev.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cream/55 underline decoration-cream/20 underline-offset-4 transition hover:text-mango hover:decoration-mango"
+            >
+              DEV SHAH
+            </a>
+          </p>
+          <p className="font-mono text-[11px] tracking-wider text-cream/30">
             GROWN IN INDIA · LOVED IN WINDSOR 🥭
           </p>
         </div>
