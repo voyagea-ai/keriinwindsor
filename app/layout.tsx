@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import SmoothScroll from "@/components/SmoothScroll";
 import CartProvider from "@/components/cart/CartContext";
 import Nav from "@/components/Nav";
@@ -98,6 +99,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
